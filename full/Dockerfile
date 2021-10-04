@@ -7,6 +7,7 @@ ENV MAVEN_VERSION=3.8.2
 ENV GRADLE_VERSION=7.2
 ENV GO_VERSION=1.17.1
 ENV NET_VERSION=LTS
+ENV DIVE_VERSION=0.10.0
 
 ### Prerequisites ###
 # Switch to root user to make installs and add openvscode-server to sudo group
@@ -112,7 +113,9 @@ RUN sudo apt-get install docker-ce docker-ce-cli containerd.io -y
 # Add openvscode-server to docker group
 RUN sudo usermod -aG docker openvscode-server
 # Add dive
-RUN curl -sL https://github.com/wagoodman/dive/releases/download/v0.10.0/dive_0.10.0_linux_amd64.deb | sudo apt install
+RUN wget https://github.com/wagoodman/dive/releases/download/v${DIVE_VERSION}/dive_${DIVE_VERSION}_linux_amd64.deb && \
+    sudo apt install ./dive_0.9.2_linux_amd64.deb && \
+    rm -f ./dive_0.9.2_linux_amd64.deb
 
 RUN echo "PATH="${PATH}"" | sudo tee /etc/environment
 ENTRYPOINT sudo service docker start && ${OPENVSCODE_SERVER_ROOT}/server.sh

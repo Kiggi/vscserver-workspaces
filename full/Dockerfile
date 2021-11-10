@@ -114,8 +114,8 @@ RUN sudo apt-get install docker-ce docker-ce-cli containerd.io -y
 RUN sudo usermod -aG docker openvscode-server
 # Add dive
 RUN wget https://github.com/wagoodman/dive/releases/download/v${DIVE_VERSION}/dive_${DIVE_VERSION}_linux_amd64.deb && \
-    sudo apt install ./dive_0.9.2_linux_amd64.deb && \
-    rm -f ./dive_0.9.2_linux_amd64.deb
+    sudo apt install ./dive_${DIVE_VERSION}_linux_amd64.deb && \
+    rm -f ./dive_${DIVE_VERSION}_linux_amd64.deb
 
 RUN echo "PATH="${PATH}"" | sudo tee /etc/environment
 ENTRYPOINT sudo service docker start && ${OPENVSCODE_SERVER_ROOT}/server.sh

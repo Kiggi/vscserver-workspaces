@@ -1,4 +1,4 @@
-FROM gitpod/openvscode-server:1.60.2
+FROM gitpod/openvscode-server:1.62.0
 
 ### Versions ###
 ENV NODE_VERSION=lts
@@ -94,7 +94,7 @@ RUN sudo apt-get install haskell-platform -y
 RUN curl -sL https://storage.googleapis.com/golang/go$GO_VERSION.linux-amd64.tar.gz | sudo tar -C /usr/local -xvz
 ENV PATH=/usr/local/go/bin:${PATH}
 
-#### .NET ###
+### .NET ###
 # Add Microsoft PPA
 RUN curl -sL https://packages.microsoft.com/config/ubuntu/20.04/packages-microsoft-prod.deb -o packages-microsoft-prod.deb
 RUN sudo apt install ./packages-microsoft-prod.deb

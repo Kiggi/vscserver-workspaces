@@ -78,7 +78,7 @@ RUN sudo npm install -g typescript yarn node-gyp
 # Install OpenJDK
 RUN sudo apt-get install openjdk-$JAVA_VERSION-jdk-headless -y
 # Install Maven
-RUN curl -sL https://dlcdn.apache.org/maven/maven-3/3.8.2/binaries/apache-maven-$MAVEN_VERSION-bin.tar.gz | sudo tar -C /usr/local -xvz
+RUN curl -sL https://dlcdn.apache.org/maven/maven-3/$MAVEN_VERSION/binaries/apache-maven-$MAVEN_VERSION-bin.tar.gz | sudo tar -C /usr/local -xvz
 # Add Maven to the PATH
 ENV PATH=/usr/local/apache-maven-${MAVEN_VERSION}/bin:${PATH}
 # Install Gradle

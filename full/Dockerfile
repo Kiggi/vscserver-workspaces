@@ -1,4 +1,4 @@
-FROM gitpod/openvscode-server:1.62.0
+FROM gitpod/openvscode-server:1.63.2
 
 ### Versions ###
 ENV NODE_VERSION=lts

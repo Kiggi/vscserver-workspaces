@@ -1,4 +1,4 @@
-FROM ghcr.io/kiggi/vscserver-base
+FROM ${BASE_IMAGE:-'ghcr.io/kiggi/vscserver-base'}
 
 ### C / C++ ###
 # Add LLVM GPG key and repository to apt (clangd doesn't work)

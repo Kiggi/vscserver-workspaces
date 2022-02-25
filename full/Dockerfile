@@ -3,7 +3,7 @@ FROM gitpod/openvscode-server:1.62.0
 ### Versions ###
 ENV NODE_VERSION=lts
 ENV JAVA_VERSION=17
-ENV MAVEN_VERSION=3.8.2
+ENV MAVEN_VERSION=3.8.3
 ENV GRADLE_VERSION=7.2
 ENV GO_VERSION=1.17.1
 ENV NET_VERSION=LTS
@@ -78,7 +78,7 @@ RUN sudo npm install -g typescript yarn node-gyp
 # Install OpenJDK
 RUN sudo apt-get install openjdk-$JAVA_VERSION-jdk-headless -y
 # Install Maven
-RUN curl -sL https://dlcdn.apache.org/maven/maven-3/3.8.2/binaries/apache-maven-$MAVEN_VERSION-bin.tar.gz | sudo tar -C /usr/local -xvz
+RUN curl -sL https://dlcdn.apache.org/maven/maven-3/$MAVEN_VERSION/binaries/apache-maven-$MAVEN_VERSION-bin.tar.gz | sudo tar -C /usr/local -xvz
 # Add Maven to the PATH
 ENV PATH=/usr/local/apache-maven-${MAVEN_VERSION}/bin:${PATH}
 # Install Gradle
@@ -114,8 +114,8 @@ RUN sudo apt-get install docker-ce docker-ce-cli containerd.io -y
 RUN sudo usermod -aG docker openvscode-server
 # Add dive
 RUN wget https://github.com/wagoodman/dive/releases/download/v${DIVE_VERSION}/dive_${DIVE_VERSION}_linux_amd64.deb && \
-    sudo apt install ./dive_0.9.2_linux_amd64.deb && \
-    rm -f ./dive_0.9.2_linux_amd64.deb
+    sudo apt install ./dive_${DIVE_VERSION}_linux_amd64.deb && \
+    rm -f ./dive_${DIVE_VERSION}_linux_amd64.deb
 
 RUN echo "PATH="${PATH}"" | sudo tee /etc/environment
 ENTRYPOINT sudo service docker start && ${OPENVSCODE_SERVER_ROOT}/server.sh

@@ -55,7 +55,7 @@ jobs:
             type=schedule,pattern=nightly
             type=schedule,pattern={{date 'YYYYMMDD'}},prefix=nightly
             type=semver,pattern={{version}}
-            type=ref,event=branch
+            type=edge,branch=main
             type=ref,event=pr
 
       # Build and push Docker image with Buildx (don't push on PR)

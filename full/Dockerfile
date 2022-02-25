@@ -5,8 +5,8 @@ FROM $BASE_IMAGE
 
 ### C / C++ ###
 # + needs to be escaped, otherwise build will fail
-COPY ../c-c\+\+/install.sh ${INSTALL_SCRIPTS}/c-c\+\+.sh
-RUN /bin/sh ${INSTALL_SCRIPTS}/c-c\+\+.sh
+COPY ../c/install.sh ${INSTALL_SCRIPTS}/c.sh
+RUN /bin/sh ${INSTALL_SCRIPTS}/c.sh
 
 ### Node.js ###
 COPY ../node-js/install.sh ${INSTALL_SCRIPTS}/node-js.sh

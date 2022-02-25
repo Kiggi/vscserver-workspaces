@@ -1,13 +1,13 @@
 FROM gitpod/openvscode-server:1.64.2
 
 ### Versions ###
-ARG NODE_VERSION=lts
-ARG JAVA_VERSION=17
-ARG MAVEN_VERSION=3.8.4
-ARG GRADLE_VERSION=7.2
-ARG GO_VERSION=1.17.1
-ARG NET_VERSION=LTS
-ARG DIVE_VERSION=0.10.0
+ENV NODE_VERSION=lts
+ENV JAVA_VERSION=17
+ENV MAVEN_VERSION=3.8.4
+ENV GRADLE_VERSION=7.2
+ENV GO_VERSION=1.17.1
+ENV NET_VERSION=LTS
+ENV DIVE_VERSION=0.10.0
 
 ### Prerequisites ###
 # Switch to root user to make installs and add openvscode-server to sudo group

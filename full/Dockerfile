@@ -1,5 +1,7 @@
 FROM ${BASE_IMAGE:-'ghcr.io/kiggi/vscserver-base'}
 
+RUN echo $BASE_IMAGE
+
 ### C / C++ ###
 # Add LLVM GPG key and repository to apt (clangd doesn't work)
 RUN curl -sL https://apt.llvm.org/llvm-snapshot.gpg.key | sudo apt-key add \

@@ -4,8 +4,9 @@ ARG BASE_IMAGE=ghcr.io/kiggi/vscserver-base:latest
 FROM $BASE_IMAGE
 
 ### C / C++ ###
-COPY ../c-c++/install.sh ${INSTALL_SCRIPTS}/c-c++.sh
-RUN /bin/sh ${INSTALL_SCRIPTS}/c-c++.sh
+# + needs to be escaped, otherwise build will fail
+COPY ../c-c\+\+/install.sh ${INSTALL_SCRIPTS}/c-c\+\+.sh
+RUN /bin/sh ${INSTALL_SCRIPTS}/c-c\+\+.sh
 
 ### Node.js ###
 COPY ../node-js/install.sh ${INSTALL_SCRIPTS}/node-js.sh

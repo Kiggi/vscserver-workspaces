@@ -70,7 +70,7 @@ jobs:
           file: base/Dockerfile
           push: true
           tags: ${{ steps.meta.outputs.tags }}
-          labels: ${{ steps.meta.outputs.labels[0] }}
+          labels: ${{ steps.meta.outputs.labels }}
 
   build_full:
 

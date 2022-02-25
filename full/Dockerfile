@@ -1,4 +1,7 @@
-FROM ghcr.io/kiggi/vscserver-base
+# Set default base image
+ARG BASE_IMAGE=ghcr.io/kiggi/vscserver-base:latest
+
+FROM $BASE_IMAGE
 
 ### C / C++ ###
 # Add LLVM GPG key and repository to apt (clangd doesn't work)

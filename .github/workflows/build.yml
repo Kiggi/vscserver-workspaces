@@ -119,7 +119,7 @@ jobs:
         id: build-and-push
         uses: docker/build-push-action@ad44023a93711e3deb337508980b4b5e9bcdc5dc
         env:
-          BASE_IMAGE: ${{ needs.build_base.meta.outputs.tags[0] }}
+          BASE_IMAGE: ${{ needs.build_base.steps.meta.outputs.tags[0] }}
         with:
           context: .
           file: full/Dockerfile

@@ -7,7 +7,6 @@ sudo bash -c 'echo "deb https://apt.llvm.org/focal/ llvm-toolchain-focal main" >
 # Install C / C++ tools
 sudo apt-get install \
     clang \
-    clangd \
     clang-format \
     clang-tidy  \
     g++ \

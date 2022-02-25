@@ -12,7 +12,6 @@ on:
 
 env:
   REGISTRY: ghcr.io
-  BASE_VERSION: ${{GITHUB_EVENT_NAME ==}}
 
 jobs:
   build_base:

@@ -109,11 +109,11 @@ RUN sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/
 # Install docker packages
 RUN sudo apt-get install docker-ce-cli -y
 # Add openvscode-server to docker group
-RUN sudo usermod -aG docker openvscode-server
+# RUN sudo usermod -aG docker openvscode-server
 # Add dive
 RUN wget https://github.com/wagoodman/dive/releases/download/v${DIVE_VERSION}/dive_${DIVE_VERSION}_linux_amd64.deb && \
     sudo apt install ./dive_${DIVE_VERSION}_linux_amd64.deb && \
     rm -f ./dive_${DIVE_VERSION}_linux_amd64.deb
 
-# Export path
+### Export path ###
 RUN echo "PATH="${PATH}"" | sudo tee /etc/environment

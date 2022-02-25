@@ -102,14 +102,12 @@ RUN rm -f ./packages-microsoft-prod.deb
 RUN sudo apt-get update && sudo apt-get install -y dotnet-sdk-5.0 dotnet-sdk-3.1
 
 ### Docker ###
-# Add vfs storage-driver config to daemon.json
-RUN sudo mkdir /etc/docker && echo '{"storage-driver": "vfs"}' | sudo tee /etc/docker/daemon.json
 # Add docker gpg key to apt
 RUN curl -sL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add
 # Add docker repository to apt
 RUN sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu focal stable"
 # Install docker packages
-RUN sudo apt-get install docker-ce docker-ce-cli containerd.io -y
+RUN sudo apt-get install docker-ce-cli -y
 # Add openvscode-server to docker group
 RUN sudo usermod -aG docker openvscode-server
 # Add dive
@@ -117,5 +115,5 @@ RUN wget https://github.com/wagoodman/dive/releases/download/v${DIVE_VERSION}/di
     sudo apt install ./dive_${DIVE_VERSION}_linux_amd64.deb && \
     rm -f ./dive_${DIVE_VERSION}_linux_amd64.deb
 
+# Export path
 RUN echo "PATH="${PATH}"" | sudo tee /etc/environment
-ENTRYPOINT sudo service docker start && ${OPENVSCODE_SERVER_ROOT}/server.sh

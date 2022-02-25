@@ -117,5 +117,3 @@ RUN wget https://github.com/wagoodman/dive/releases/download/v${DIVE_VERSION}/di
 
 ### Export path ###
 RUN echo "PATH="${PATH}"" | sudo tee /etc/environment
-
-ENTRYPOINT [ "/bin/sh", "-c", "exec ${OPENVSCODE_SERVER_ROOT}/bin/openvscode-server --host 0.0.0.0 --without-connection-token" ]

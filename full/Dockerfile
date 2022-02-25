@@ -1,4 +1,6 @@
-FROM ${BASE_IMAGE:-'ghcr.io/kiggi/vscserver-base'}
+ARG BASE_IMAGE=ghcr.io/kiggi/vscserver-base
+
+FROM $BASE_IMAGE
 
 RUN echo $BASE_IMAGE
 

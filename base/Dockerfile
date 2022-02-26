@@ -17,8 +17,8 @@ USER root
 # Disable prompts during install
 ENV DEBIAN_FRONTEND noninteractive
 # Copy and run prerequisites script
-COPY ./prerequisites.sh ${INSTALL_SCRIPTS}/prerequisites.sh
-RUN /bin/sh ${INSTALL_SCRIPTS}/prerequisites.sh
+COPY ./base-install.sh ${INSTALL_SCRIPTS}/base-install.sh
+RUN /bin/sh ${INSTALL_SCRIPTS}/base-install.sh
 # Set locales to en_US
 ENV LANG=en_US.UTF-8
 # Switch back to openvscode-server user for setup

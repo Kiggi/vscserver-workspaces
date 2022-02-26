@@ -2,4 +2,4 @@
 echo "PATH="${PATH}"" | sudo tee /etc/environment
 
 # Remove install scripts folder
-rm -rf ${INSTALL_SCRIPTS}
+sudo rm -rf ${INSTALL_SCRIPTS}

@@ -13,23 +13,17 @@ COPY ../node-js/install.sh ${INSTALL_SCRIPTS}/node-js.sh
 RUN /bin/sh ${INSTALL_SCRIPTS}/node-js.sh
 
 ### Java ###
-# Install OpenJDK
-RUN sudo apt-get install openjdk-${JAVA_VERSION}-jdk-headless -y
-# Install Maven
-RUN curl -sL https://dlcdn.apache.org/maven/maven-3/${MAVEN_VERSION}/binaries/apache-maven-${MAVEN_VERSION}-bin.tar.gz | sudo tar -C /usr/local -xvz
-# Add Maven to the PATH
-ENV PATH=/usr/local/apache-maven-${MAVEN_VERSION}/bin:${PATH}
-# Install Gradle
-RUN sudo curl -o /opt/gradle -sL https://services.gradle.org/distributions/gradle-${GRADLE_VERSION}-bin.zip \
-    && sudo unzip -d /usr/local /opt/gradle && sudo rm -rf /opt/gradle
-# Add Gradle to the PATH
-ENV PATH=/usr/local/gradle-${GRADLE_VERSION}/bin:${PATH}
+COPY ../java/install.sh ${INSTALL_SCRIPTS}/java.sh
+RUN /bin/sh ${INSTALL_SCRIPTS}/java.sh
+ENV PATH=/usr/local/apache-maven-${MAVEN_VERSION}/bin:/usr/local/gradle-${GRADLE_VERSION}/bin:${PATH}
 
 ### Haskell ###
-RUN sudo apt-get install haskell-platform -y
+COPY ../haskell/install.sh ${INSTALL_SCRIPTS}/haskell.sh
+RUN /bin/sh ${INSTALL_SCRIPTS}/haskell.sh
 
 ### Go ###
-RUN curl -sL https://go.dev/dl/go${GO_VERSION}.linux-amd64.tar.gz | sudo tar -C /usr/local -xvz
+COPY ../go/install.sh ${INSTALL_SCRIPTS}/go.sh
+RUN /bin/sh ${INSTALL_SCRIPTS}/go.sh
 ENV PATH=/usr/local/go/bin:${PATH}
 
 ### .NET ###
@@ -53,5 +47,6 @@ RUN wget https://github.com/wagoodman/dive/releases/download/v${DIVE_VERSION}/di
     sudo apt install ./dive_${DIVE_VERSION}_linux_amd64.deb && \
     rm -f ./dive_${DIVE_VERSION}_linux_amd64.deb
 
-### Export path ###
-RUN echo "PATH="${PATH}"" | sudo tee /etc/environment
+### Cleanup ###
+COPY ../base/cleanup.sh ${INSTALL_SCRIPTS}/cleanup.sh
+RUN ${INSTALL_SCRIPTS}/cleanup.sh

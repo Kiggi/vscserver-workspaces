@@ -12,42 +12,14 @@ ENV DIVE_VERSION=0.10.0
 ENV INSTALL_SCRIPTS=/tmp/install
 
 ### Prerequisites ###
-# Switch to root user to make installs and add openvscode-server to sudo group
+# Switch to root user to make installs
 USER root
-RUN apt-get update
-# Install necessary tools (sorted alphabetically) (ripgrep doesn't work) (apt-utils?)
-RUN apt-get install \
-    apt-transport-https \ 
-    apt-utils \
-    bash-completion \
-    build-essential \
-    ca-certificates \
-    curl \
-    emacs-nox \
-    fish \
-    gnupg \
-    htop \
-    jq \
-    less \
-    locales \
-    lsb-release \
-    lsof \
-    man-db \
-    multitail \
-    nano \
-    ninja-build \
-    software-properties-common \
-    ssl-cert \
-    sudo \
-    time \
-    unzip \
-    vim \
-    zip \
-    zsh -y
-# Generate and set locale to en_US.UTF-8
-RUN locale-gen en_US.UTF-8
+# Disable prompts during install
+ENV DEBIAN_FRONTEND noninteractive
+# Copy and run prerequisites script
+COPY ./prerequisites.sh ${INSTALL_SCRIPTS}/prerequisites.sh
+RUN /bin/sh ${INSTALL_SCRIPTS}/prerequisites.sh
+# Set locales to en_US
 ENV LANG=en_US.UTF-8
-# Add openvscode-server to sudoers file
-RUN echo "openvscode-server  ALL=(ALL) NOPASSWD:ALL"  >> /etc/sudoers
-# Switch back to openvscode-server for setup
+# Switch back to openvscode-server user for setup
 USER openvscode-server

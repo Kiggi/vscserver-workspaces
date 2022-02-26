@@ -12,6 +12,8 @@ on:
 
 env:
   REGISTRY: ghcr.io
+  DOCKERHUB_REGISTRY: docker.io
+  DOCKERHUB_USERNAME: kiggi
 
 jobs:
   build_base:
@@ -44,13 +46,22 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Log into registry ${{ env.DOCKERHUB_REGISTRY }}
+        uses: docker/login-action@28218f9b04b4f3f62068d7b6ce6ca5b26e35336c
+        with:
+          registry: ${{ env.DOCKERHUB_REGISTRY }}
+          username: ${{ env.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
       # Extract metadata (tags, labels) for Docker
       # https://github.com/docker/metadata-action
       - name: Extract Github Registry metadata
         id: meta
         uses: docker/metadata-action@98669ae865ea3cffbcbaa878cf57c20bbf1c6c38
         with:
-          images: ${{ env.REGISTRY }}/kiggi/vscserver-base
+          images: |
+            ${{ env.REGISTRY }}/kiggi/vscserver-base
+            ${{ env.DOCKERHUB_REGISTRY }}/kiggi/vscserver-base
           flavor: |
             latest=auto
           tags: |
@@ -100,13 +111,22 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Log into registry ${{ env.DOCKERHUB_REGISTRY }}
+        uses: docker/login-action@28218f9b04b4f3f62068d7b6ce6ca5b26e35336c
+        with:
+          registry: ${{ env.DOCKERHUB_REGISTRY }}
+          username: ${{ env.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
       # Extract metadata (tags, labels) for Docker
       # https://github.com/docker/metadata-action
       - name: Extract Github Registry metadata
         id: meta
         uses: docker/metadata-action@98669ae865ea3cffbcbaa878cf57c20bbf1c6c38
         with:
-          images: ${{ env.REGISTRY }}/kiggi/vscserver-full
+          images: |
+            ${{ env.REGISTRY }}/kiggi/vscserver-full
+            ${{ env.DOCKERHUB_REGISTRY }}/kiggi/vscserver-full
           flavor: |
             latest=auto
           tags: |

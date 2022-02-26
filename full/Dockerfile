@@ -27,25 +27,12 @@ RUN /bin/sh ${INSTALL_SCRIPTS}/go.sh
 ENV PATH=/usr/local/go/bin:${PATH}
 
 ### .NET ###
-# Add Microsoft PPA
-RUN curl -sL https://packages.microsoft.com/config/ubuntu/20.04/packages-microsoft-prod.deb -o packages-microsoft-prod.deb
-RUN sudo apt install ./packages-microsoft-prod.deb
-RUN rm -f ./packages-microsoft-prod.deb
-RUN sudo apt-get update && sudo apt-get install -y dotnet-sdk-6.0 dotnet-sdk-5.0 dotnet-sdk-3.1
+COPY ../dotnet/install.sh ${INSTALL_SCRIPTS}/dotnet.sh
+RUN /bin/sh ${INSTALL_SCRIPTS}/dotnet.sh
 
 ### Docker ###
-# Add docker gpg key to apt
-RUN curl -sL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add
-# Add docker repository to apt
-RUN sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu focal stable"
-# Install docker packages
-RUN sudo apt-get install docker-ce-cli -y
-# Add openvscode-server to docker group
-# RUN sudo usermod -aG docker openvscode-server
-# Add dive
-RUN wget https://github.com/wagoodman/dive/releases/download/v${DIVE_VERSION}/dive_${DIVE_VERSION}_linux_amd64.deb && \
-    sudo apt install ./dive_${DIVE_VERSION}_linux_amd64.deb && \
-    rm -f ./dive_${DIVE_VERSION}_linux_amd64.deb
+COPY ../docker/install.sh ${INSTALL_SCRIPTS}/docker.sh
+RUN /bin/sh ${INSTALL_SCRIPTS}/docker.sh
 
 ### Cleanup ###
 COPY ../base/cleanup.sh ${INSTALL_SCRIPTS}/cleanup.sh

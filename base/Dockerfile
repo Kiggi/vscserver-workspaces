@@ -17,7 +17,7 @@ USER root
 # Disable prompts during install
 ENV DEBIAN_FRONTEND noninteractive
 # Copy and run prerequisites script
-COPY base-install.sh ${INSTALL_SCRIPTS}/base-install.sh
+COPY /base/base-install.sh ${INSTALL_SCRIPTS}/base-install.sh
 RUN /bin/sh ${INSTALL_SCRIPTS}/base-install.sh
 # Set locales to en_US
 ENV LANG=en_US.UTF-8

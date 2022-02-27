@@ -30,7 +30,7 @@ jobs:
       id-token: write
 
     outputs:
-      base_image: ${{ steps.meta.outputs.tags[0] }}
+      base_image: ${{ steps.meta.outputs.tags }}
 
     steps:
       - name: Set image variables

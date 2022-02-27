@@ -618,7 +618,7 @@ jobs:
       - name: Set image variables
         run: |
           echo "GHCR_IMAGE=${GHCR_REGISTRY}/${IMAGE_OWNER}/${IMAGE_PREFIX}-nodejs" >> $GITHUB_ENV
-          echo "DOCKERHUB_IMAGE=${DOCKERHUB_REGISTRY}/${IMAGE_OWNER}/${IMAGE_PREFIX}-java" >> $GITHUB_ENV
+          echo "DOCKERHUB_IMAGE=${DOCKERHUB_REGISTRY}/${IMAGE_OWNER}/${IMAGE_PREFIX}-nodejs" >> $GITHUB_ENV
 
       - name: Checkout repository
         uses: actions/checkout@v2

@@ -164,7 +164,7 @@ jobs:
           build-args: |
             BASE_IMAGE=${{ needs.build_base.outputs.base_image }}
 
-build_c:
+  build_c:
 
     name: "Build and push C image"
     runs-on: ubuntu-latest
@@ -237,7 +237,7 @@ build_c:
           build-args: |
             BASE_IMAGE=${{ needs.build_base.outputs.base_image }
 
-build_docker:
+  build_docker:
 
     name: "Build and push Docker image"
     runs-on: ubuntu-latest
@@ -310,7 +310,7 @@ build_docker:
           build-args: |
             BASE_IMAGE=${{ needs.build_base.outputs.base_image }}
 
-build_docker:
+  build_dotnet:
 
     name: "Build and push .NET image"
     runs-on: ubuntu-latest

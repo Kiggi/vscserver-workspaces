@@ -1,9 +1,33 @@
-# kiggi/vscserver-workspace
+# VS Code Server Workspaces 
 
-This is a collection of docker images based on Gitpod's [OpenVSCodeServer](https://github.com/gitpod-io/openvscode-server) project.
+A collection of Docker images providing ready-to-use workspaces for developers.
 
-This project aims to provide a ready-to-use cloud workspace for developers inside a Docker container.
+It includes an up-to-date collection of tools for a wide variety of programming languages.
 
-## Workspace images
+## Supported languages
 
-- [Full setup](/full)
+- [C / C++](/c)
+    - CLang
+    - GCC
+    - Make
+    - LLVM
+- [Node.js](/node-js) (LTS v16.14.0)
+    - TypeScript
+    - Yarn
+    - NPM
+    - node-gyp
+- [Java](/java) (OpenJDK 17)
+    - Maven
+    - Gradle
+- [Haskell](/haskell)
+    - Glasgow Haskell Compiler
+    - Cabal
+    - Stack
+- [Go](/go) (v.1.17.7)
+- [.NET](/dotnet) (.NET 6.0)
+- [Docker](/docker) (Docker CLI for host system)
+
+## License
+
+[MIT](https://choosealicense.com/licenses/mit/)
+

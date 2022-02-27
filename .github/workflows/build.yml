@@ -11,13 +11,18 @@ on:
     branches: [ main ]
 
 env:
-  REGISTRY: ghcr.io
+  GITHUB_REGISTRY: ghcr.io
   DOCKERHUB_REGISTRY: docker.io
   DOCKERHUB_USERNAME: kiggi
+  IMAGE_PREFIX: vscserver
+  IMAGE_OWNER: kiggi
+  GITHUB_IMAGE: ${{ env.GITHUB_REGISTRY }}/${{ env.IMAGE_OWNER }}/${{ env.IMAGE_PREFIX }}
+  DOCKERHUB_IMAGE: ${{ env.DOCKERHUB_REGISTRY }}/${{ env.IMAGE_OWNER }}/${{ env.IMAGE_PREFIX }}
 
 jobs:
   build_base:
 
+    name: "Build and push base image"
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -27,7 +32,7 @@ jobs:
       id-token: write
 
     outputs:
-      base_image: ${{ steps.meta.outputs.tags }}
+      base_image: ${{ steps.meta.outputs.tags[0] }}
 
     steps:
       - name: Checkout repository
@@ -39,10 +44,10 @@ jobs:
 
       # Login against a Docker registry
       # https://github.com/docker/login-action
-      - name: Log into registry ${{ env.REGISTRY }}
+      - name: Log into registry ${{ env.GITHUB_REGISTRY }}
         uses: docker/login-action@28218f9b04b4f3f62068d7b6ce6ca5b26e35336c
         with:
-          registry: ${{ env.REGISTRY }}
+          registry: ${{ env.GITHUB_REGISTRY }}
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
@@ -55,13 +60,13 @@ jobs:
 
       # Extract metadata (tags, labels) for Docker
       # https://github.com/docker/metadata-action
-      - name: Extract Github Registry metadata
+      - name: Extract base metadata
         id: meta
         uses: docker/metadata-action@98669ae865ea3cffbcbaa878cf57c20bbf1c6c38
         with:
           images: |
-            ${{ env.REGISTRY }}/kiggi/vscserver-base
-            ${{ env.DOCKERHUB_REGISTRY }}/kiggi/vscserver-base
+            ${{ env.GITHUB_IMAGE }}-base
+            ${{ env.DOCKERHUB_IMAGE }}-base
           flavor: |
             latest=auto
           tags: |
@@ -73,7 +78,7 @@ jobs:
 
       # Build and push Docker image with Buildx
       # https://github.com/docker/build-push-action
-      - name: Build and push workspace-full image to GitHub
+      - name: Build and push base image
         id: build-and-push
         uses: docker/build-push-action@ad44023a93711e3deb337508980b4b5e9bcdc5dc
         with:
@@ -85,6 +90,7 @@ jobs:
 
   build_full:
 
+    name: "Build and push full image"
     runs-on: ubuntu-latest
     needs: [build_base]
     permissions:
@@ -104,10 +110,10 @@ jobs:
 
       # Login against a Docker registry
       # https://github.com/docker/login-action
-      - name: Log into registry ${{ env.REGISTRY }}
+      - name: Log into registry ${{ env.GITHUB_REGISTRY }}
         uses: docker/login-action@28218f9b04b4f3f62068d7b6ce6ca5b26e35336c
         with:
-          registry: ${{ env.REGISTRY }}
+          registry: ${{ env.GITHUB_REGISTRY }}
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
@@ -120,13 +126,13 @@ jobs:
 
       # Extract metadata (tags, labels) for Docker
       # https://github.com/docker/metadata-action
-      - name: Extract Github Registry metadata
+      - name: Extract full metadata
         id: meta
         uses: docker/metadata-action@98669ae865ea3cffbcbaa878cf57c20bbf1c6c38
         with:
           images: |
-            ${{ env.REGISTRY }}/kiggi/vscserver-full
-            ${{ env.DOCKERHUB_REGISTRY }}/kiggi/vscserver-full
+            ${{ env.GITHUB_IMAGE }}-full
+            ${{ env.DOCKERHUB_IMAGE }}-full
           flavor: |
             latest=auto
           tags: |
@@ -138,7 +144,7 @@ jobs:
 
       # Build and push Docker image with Buildx
       # https://github.com/docker/build-push-action
-      - name: Build and push workspace-full image to GitHub
+      - name: Build and push full image
         id: build-and-push
         uses: docker/build-push-action@ad44023a93711e3deb337508980b4b5e9bcdc5dc
         with:

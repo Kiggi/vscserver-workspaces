@@ -4,7 +4,6 @@ ARG BASE_IMAGE=ghcr.io/kiggi/vscserver-base:latest
 FROM $BASE_IMAGE
 
 ### C / C++ ###
-# + needs to be escaped, otherwise build will fail
 COPY ../c/install.sh ${INSTALL_SCRIPTS}/c.sh
 RUN /bin/sh ${INSTALL_SCRIPTS}/c.sh
 
@@ -34,6 +33,3 @@ RUN /bin/sh ${INSTALL_SCRIPTS}/dotnet.sh
 COPY ../docker/install.sh ${INSTALL_SCRIPTS}/docker.sh
 RUN /bin/sh ${INSTALL_SCRIPTS}/docker.sh
 
-### Cleanup ###
-COPY ../base/cleanup.sh ${INSTALL_SCRIPTS}/cleanup.sh
-RUN /bin/sh ${INSTALL_SCRIPTS}/cleanup.sh

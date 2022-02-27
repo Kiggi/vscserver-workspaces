@@ -11,12 +11,12 @@ on:
     branches: [ main ]
 
 env:
-  GITHUB_REGISTRY: ghcr.io
+  GHCR_REGISTRY: ghcr.io
   DOCKERHUB_REGISTRY: docker.io
   DOCKERHUB_USERNAME: kiggi
   IMAGE_PREFIX: vscserver
   IMAGE_OWNER: kiggi
-  GITHUB_IMAGE: ${{ env.GITHUB_REGISTRY }}/${{ env.IMAGE_OWNER }}/${{ env.IMAGE_PREFIX }}
+  GHCR_IMAGE: ${{ env.GHCR_REGISTRY }}/${{ env.IMAGE_OWNER }}/${{ env.IMAGE_PREFIX }}
   DOCKERHUB_IMAGE: ${{ env.DOCKERHUB_REGISTRY }}/${{ env.IMAGE_OWNER }}/${{ env.IMAGE_PREFIX }}
 
 jobs:
@@ -44,10 +44,10 @@ jobs:
 
       # Login against a Docker registry
       # https://github.com/docker/login-action
-      - name: Log into registry ${{ env.GITHUB_REGISTRY }}
+      - name: Log into registry ${{ env.GHCR_REGISTRY }}
         uses: docker/login-action@28218f9b04b4f3f62068d7b6ce6ca5b26e35336c
         with:
-          registry: ${{ env.GITHUB_REGISTRY }}
+          registry: ${{ env.GHCR_REGISTRY }}
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
@@ -65,7 +65,7 @@ jobs:
         uses: docker/metadata-action@98669ae865ea3cffbcbaa878cf57c20bbf1c6c38
         with:
           images: |
-            ${{ env.GITHUB_IMAGE }}-base
+            ${{ env.GHCR_IMAGE }}-base
             ${{ env.DOCKERHUB_IMAGE }}-base
           flavor: |
             latest=auto
@@ -110,10 +110,10 @@ jobs:
 
       # Login against a Docker registry
       # https://github.com/docker/login-action
-      - name: Log into registry ${{ env.GITHUB_REGISTRY }}
+      - name: Log into registry ${{ env.GHCR_REGISTRY }}
         uses: docker/login-action@28218f9b04b4f3f62068d7b6ce6ca5b26e35336c
         with:
-          registry: ${{ env.GITHUB_REGISTRY }}
+          registry: ${{ env.GHCR_REGISTRY }}
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
@@ -131,7 +131,7 @@ jobs:
         uses: docker/metadata-action@98669ae865ea3cffbcbaa878cf57c20bbf1c6c38
         with:
           images: |
-            ${{ env.GITHUB_IMAGE }}-full
+            ${{ env.GHCR_IMAGE }}-full
             ${{ env.DOCKERHUB_IMAGE }}-full
           flavor: |
             latest=auto

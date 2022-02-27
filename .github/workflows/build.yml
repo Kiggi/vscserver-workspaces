@@ -16,8 +16,6 @@ env:
   DOCKERHUB_USERNAME: kiggi
   IMAGE_PREFIX: vscserver
   IMAGE_OWNER: kiggi
-  GHCR_IMAGE: ${{ env.GHCR_REGISTRY }}/${{ env.IMAGE_OWNER }}/${{ env.IMAGE_PREFIX }}
-  DOCKERHUB_IMAGE: ${{ env.DOCKERHUB_REGISTRY }}/${{ env.IMAGE_OWNER }}/${{ env.IMAGE_PREFIX }}
 
 jobs:
   build_base:
@@ -35,6 +33,11 @@ jobs:
       base_image: ${{ steps.meta.outputs.tags[0] }}
 
     steps:
+      - name: Set image variables
+        run: |
+          echo "GHCR_IMAGE=$GHCR_REGISTRY/$IMAGE_OWNER/$IMAGE_PREFIX-base" >> $GITHUB_ENV
+          echo "DOCKERHUB_IMAGE=$DOCKERHUB_REGISTRY/$IMAGE_OWNER/$IMAGE_PREFIX-base" >> $GITHUB_ENV
+
       - name: Checkout repository
         uses: actions/checkout@v2
 
@@ -65,8 +68,8 @@ jobs:
         uses: docker/metadata-action@98669ae865ea3cffbcbaa878cf57c20bbf1c6c38
         with:
           images: |
-            ${{ env.GHCR_IMAGE }}-base
-            ${{ env.DOCKERHUB_IMAGE }}-base
+            ${{ env.GHCR_IMAGE }}
+            ${{ env.DOCKERHUB_IMAGE }}
           flavor: |
             latest=auto
           tags: |
@@ -101,6 +104,11 @@ jobs:
       id-token: write
 
     steps:
+      - name: Set image variables
+        run: |
+          echo "GHCR_IMAGE=${GHCR_REGISTRY}/${IMAGE_OWNER}/${IMAGE_PREFIX}-full" >> $GITHUB_ENV
+          echo "DOCKERHUB_IMAGE=${DOCKERHUB_REGISTRY}/${IMAGE_OWNER}/${IMAGE_PREFIX}-base" >> $GITHUB_ENV
+
       - name: Checkout repository
         uses: actions/checkout@v2
 
@@ -131,8 +139,8 @@ jobs:
         uses: docker/metadata-action@98669ae865ea3cffbcbaa878cf57c20bbf1c6c38
         with:
           images: |
-            ${{ env.GHCR_IMAGE }}-full
-            ${{ env.DOCKERHUB_IMAGE }}-full
+            ${{ env.GHCR_IMAGE }}
+            ${{ env.DOCKERHUB_IMAGE }}
           flavor: |
             latest=auto
           tags: |

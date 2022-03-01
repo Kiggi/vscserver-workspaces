@@ -1,4 +1,5 @@
-# Install necessary tools (sorted alphabetically)
+### Prerequisites ###
+# Install system tools (sorted alphabetically)
 apt-get update
 apt-get upgrade -y
 
@@ -30,3 +31,10 @@ locale-gen en_US.UTF-8
 
 # Add openvscode-server to sudoers file
 echo "openvscode-server  ALL=(ALL) NOPASSWD:ALL"  >> /etc/sudoers
+
+### Base Tools ###
+# Install Github CLI
+curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | dd of=/usr/share/keyrings/githubcli-archive-keyring.gpg
+echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" | tee /etc/apt/sources.list.d/github-cli.list > /dev/null
+apt update
+apt install gh

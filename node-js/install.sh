@@ -1,3 +1,5 @@
+NODE_VERSION=lts
+
 # Run Node.js setup script
 curl -sL https://deb.nodesource.com/setup_${NODE_VERSION}.x | sudo bash
 

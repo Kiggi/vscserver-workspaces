@@ -1,16 +1,5 @@
 FROM gitpod/openvscode-server:1.64.2
 
-### Versions ###
-ENV NODE_VERSION=lts
-ENV JAVA_VERSION=17
-ENV MAVEN_VERSION=3.8.4
-ENV GRADLE_VERSION=7.4
-ENV GO_VERSION=1.17.7
-ENV DIVE_VERSION=0.10.0
-
-### Paths ###
-ENV INSTALL_SCRIPTS=/tmp/install
-
 ### Prerequisites ###
 # Switch to root user to make installs
 USER root

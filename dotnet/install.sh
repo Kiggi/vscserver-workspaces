@@ -5,4 +5,4 @@ rm -f ./packages-microsoft-prod.deb
 
 # Install current versions
 sudo apt-get update
-sudo apt-get install -y dotnet-sdk-6.0 dotnet-sdk-5.0 dotnet-sdk-3.1
+sudo apt-get install -y dotnet-sdk-${DOTNET_LATEST_VERSION} dotnet-sdk-${DOTNET_LATEST_VERSION}

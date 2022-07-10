@@ -1,4 +1,4 @@
-FROM gitpod/openvscode-server:1.64.2
+FROM gitpod/openvscode-server:1.69.0
 
 ### Prerequisites ###
 # Switch to root user to make installs

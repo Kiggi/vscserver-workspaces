@@ -1,3 +1,5 @@
+DIVE_VERSION=0.10.0
+
 # Add docker gpg key to apt
 curl -sL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add
 

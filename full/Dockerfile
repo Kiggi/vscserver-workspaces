@@ -14,7 +14,6 @@ RUN /bin/sh ${INSTALL_SCRIPTS}/node-js.sh
 ### Java ###
 COPY ../java/install.sh ${INSTALL_SCRIPTS}/java.sh
 RUN /bin/sh ${INSTALL_SCRIPTS}/java.sh
-ENV PATH=/usr/local/apache-maven-${MAVEN_VERSION}/bin:/usr/local/gradle-${GRADLE_VERSION}/bin:${PATH}
 
 ### Haskell ###
 COPY ../haskell/install.sh ${INSTALL_SCRIPTS}/haskell.sh
@@ -23,7 +22,6 @@ RUN /bin/sh ${INSTALL_SCRIPTS}/haskell.sh
 ### Go ###
 COPY ../go/install.sh ${INSTALL_SCRIPTS}/go.sh
 RUN /bin/sh ${INSTALL_SCRIPTS}/go.sh
-ENV PATH=/usr/local/go/bin:${PATH}
 
 ### .NET ###
 COPY ../dotnet/install.sh ${INSTALL_SCRIPTS}/dotnet.sh

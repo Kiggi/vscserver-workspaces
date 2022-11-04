@@ -2,7 +2,7 @@
 curl -sL https://deb.nodesource.com/setup_${NODE_VERSION}.x | sudo bash
 
 # Install nodejs and npm
-sudo apt-get install nodejs -y
+sudo apt-get install nodejs npm -y
 
 # Upgrade npm
 sudo npm install -g npm

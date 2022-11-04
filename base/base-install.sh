@@ -25,11 +25,8 @@ apt-get install -y \
     zsh \
     ubuntu-server
 
-# Set .env variables
-if [ -f .env ]; then
-    # Load Environment Variables
-    export $(cat ../.env | grep -v '#' | sed 's/\r$//' | awk '/=/ {print $1}' )
-fi
+# Load Environment Variables
+export $(cat ../.env | grep -v '#' | sed 's/\r$//' | awk '/=/ {print $1}' )
 
 # Generate locale en_US.UTF-8
 locale-gen en_US.UTF-8

@@ -1,8 +1,9 @@
 # Run Node.js setup script
-curl -sL https://deb.nodesource.com/setup_${NODE_VERSION}.x | sudo bash
+echo "https://deb.nodesource.com/setup_${NODE_VERSION}.x"
+curl -sL https://deb.nodesource.com/setup_${NODE_VERSION}.x | sudo bash -
 
 # Install nodejs and npm
-sudo apt-get install nodejs npm -y
+sudo apt-get install nodejs -y
 
 # Upgrade npm
 sudo npm install -g npm

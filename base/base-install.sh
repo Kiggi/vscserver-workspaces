@@ -4,6 +4,7 @@ apt-get upgrade -y
 
 apt-get install -y \
     apt-transport-https \
+    apt-utils \
     bash-completion \
     build-essential \
     ca-certificates \
